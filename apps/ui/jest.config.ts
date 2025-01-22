@@ -1,8 +1,8 @@
 export default {
-  displayName: 'marketplace',
+  displayName: 'ui',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/marketplace',
+  coverageDirectory: '../../coverage/apps/ui',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

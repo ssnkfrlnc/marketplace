@@ -1,5 +1,6 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "extends": "nx/presets/npm.json",
+  "$schema": "https://raw.githubusercontent.com/nrwl/nx/refs/heads/master/packages/nx/schemas/nx-schema.json",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
@@ -15,7 +16,10 @@
       "!{projectRoot}/**/*.cy.[jt]s?(x)",
       "!{projectRoot}/cypress.config.[jt]s"
     ],
-    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
+    "sharedGlobals": [
+      "{workspaceRoot}/.github/workflows/ci.yml",
+      "{workspaceRoot}/go.mod"
+    ]
   },
   "nxCloudId": "6790c2c643ab05b3c054af9b",
   "targetDefaults": {
@@ -36,11 +40,22 @@
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "options": { "passWithNoTests": true },
-      "configurations": { "ci": { "ci": true, "codeCoverage": true } }
+      "options": {
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
     },
-    "e2e-ci--**/*": { "dependsOn": ["^build"] },
-    "server": { "cache": true }
+    "e2e-ci--**/*": {
+      "dependsOn": ["^build"]
+    },
+    "server": {
+      "cache": true
+    }
   },
   "plugins": [
     {
@@ -52,7 +67,13 @@
         "ciTargetName": "e2e-ci"
       }
     },
-    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } }
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    "@nx-go/nx-go"
   ],
   "generators": {
     "@nx/angular:application": {
