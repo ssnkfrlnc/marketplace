@@ -8,5 +8,5 @@ func Hello(name string) string {
 }
 
 func main() {
-	fmt.Println(Hello("be"))
+	fmt.Println(Hello("be/svc_user"))
 }
