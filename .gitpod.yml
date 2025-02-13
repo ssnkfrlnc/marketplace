@@ -22,7 +22,8 @@ tasks:
       rm package-lock.json
       npm i
     command: |
-      nx run-many --target=serve --all --parallel
+      make run APP=marketplace COMMAND=dev
+# nx run-many --target=serve --all --parallel
 
 vscode:
   extensions:
