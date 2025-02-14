@@ -1,0 +1,21 @@
+version: v2
+modules:
+  - path: v0
+    name: buf.build/ssnk-in/marketplace
+    lint:
+      use:
+        - STANDARD
+      except:
+        - IMPORT_USED
+    breaking:
+      use:
+        - FILE
+      except:
+        - EXTENSION_MESSAGE_NO_DELETE
+      ignore_unstable_packages: true
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE

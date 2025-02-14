@@ -1,0 +1,247 @@
+openapi: 3.0.0
+info:
+  title: marketplace
+  description: marketplace is a URL shortener written in Rust, hosted at marketplace.ssnk.in..
+  version: 0.0.1
+
+servers:
+- url: "https://gw.ssnk.in/v1/marketplace/v1"
+  description: Production instance of marketplace accessible through the ssnk.in API gateway
+- url: "https://gws.ssnk.in/v1/marketplace/v1"
+  description: Staging instance of marketplace accessible through the staging instance of ssnk.in API gateway
+
+paths:
+  /:
+    get:
+      summary: Returns long URL from shortened URL or ID
+      description: With either id or url query parameter, returns the URL short or long form
+      parameters:
+        - in: header
+          name: X-Forwarded-For
+          required: true
+          schema:
+            type: string
+          description: Client IP for geolocation
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          description: Bearer token (JWT) for ssnk.in API gateway authentication  and RBAC
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: string
+          description: UUID for the URL entry
+        - in: query
+          name: url
+          required: false
+          schema:
+            type: string
+          description: Long form URL to create and/or get short form, or short form URL to get long form if exists
+        - in: query
+          name: setnx
+          required: false
+          schema:
+            type: boolean
+          description: With URL query parameter containing long form URL that does not exist, SETNX ensures a new shortened is created, and is true by default
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                header:
+                  required:
+                    - X-Forwarded-For
+                    - Authorization
+                query:
+                  oneOf:
+                    - required:
+                        - id
+                    - required:
+                        - url
+      responses:
+        "200":
+          description: Status OK JSON object with ID and long form URL
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "201":
+          description: Status OK entry created with JSON object containing ID and short form URL
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          description: Status Bad Request with invalid query param combination, or values
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: Status entry not found and not created as SETNX was disabled
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: Returns long URL from shortened URL or ID
+      description: With either id or url query parameter, returns the URL short or long form
+      parameters:
+        - in: header
+          name: X-Forwarded-For
+          required: true
+          schema:
+            type: string
+          description: Client IP for geolocation
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          description: Bearer token (JWT) for ssnk.in API gateway authentication  and RBAC
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: string
+          description: UUID for the URL entry
+        - in: query
+          name: url
+          required: false
+          schema:
+            type: string
+          description: Long form URL to create and/or get short form, or short form URL to get long form if exists
+        - in: query
+          name: setnx
+          required: false
+          schema:
+            type: boolean
+          description: With URL query parameter containing long form URL that does not exist, SETNX ensures a new shortened is created, and is true by default
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                header:
+                  required:
+                    - X-Forwarded-For
+                    - Authorization
+                query:
+                  oneOf:
+                    - required:
+                        - id
+                    - required:
+                        - url
+      responses:
+        "200":
+          description: Status entry not found and not created as SETNX was disabled
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "201":
+          description: Status OK entry created with JSON object containing ID and short form URL
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "409":
+          description: Status OK JSON object with ID and long form URL
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    delete:
+      summary: Returns long URL from shortened URL or ID
+      description: With either id or url query parameter, returns the URL short or long form
+      parameters:
+        - in: header
+          name: X-Forwarded-For
+          required: true
+          schema:
+            type: string
+          description: Client IP for geolocation
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+          description: Bearer token (JWT) for ssnk.in API gateway authentication  and RBAC
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: string
+          description: UUID for the URL entry
+        - in: query
+          name: url
+          required: false
+          schema:
+            type: string
+          description: Long form URL to create and/or get short form, or short form URL to get long form if exists
+        - in: query
+          name: setnx
+          required: false
+          schema:
+            type: boolean
+          description: With URL query parameter containing long form URL that does not exist, SETNX ensures a new shortened is created, and is true by default
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                header:
+                  required:
+                    - X-Forwarded-For
+                    - Authorization
+                query:
+                  oneOf:
+                    - required:
+                        - id
+                    - required:
+                        - url
+      responses:
+        "200":
+          description: Status entry not found and not created as SETNX was disabled
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "400":
+          description: Status Bad Request with invalid query param combination, or values
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: Status entry not found and not created as SETNX was disabled
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string

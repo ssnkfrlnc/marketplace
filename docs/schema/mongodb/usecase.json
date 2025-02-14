@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Use case Document Schema",
+    "description": "Schema for documents in dynamic use case collections",
+    "bsonType": "object",
+    "required": ["_id", "payload", "file_type"],
+    "properties": {
+      "_id": {
+        "bsonType": "string",
+        "description": "Version identifier (e.g. 'version1')"
+      },
+      "payload": {
+        "bsonType": "binData",
+        "description": "Binary payload storage for any data format"
+      },
+      "file_type": {
+        "bsonType": "string",
+        "enum": ["json", "yaml", "xml"],
+        "description": "Format of the stored payload"
+      }
+    },
+    "additionalProperties": false
+  }

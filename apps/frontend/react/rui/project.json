@@ -1,56 +1,62 @@
 {
-  "name": "rui",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/frontend/react/rui/src",
-  "projectType": "application",
-  "tags": [],
-  "targets": {
-    "build": {
-      "executor": "@nx/rspack:rspack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "target": "web",
-        "outputPath": "dist/apps/frontend/react/rui",
-        "index": "apps/frontend/react/rui/src/index.html",
-        "main": "apps/frontend/react/rui/src/main.tsx",
-        "tsConfig": "apps/frontend/react/rui/tsconfig.app.json",
-        "rspackConfig": "apps/frontend/react/rui/rspack.config.js",
-        "assets": [
-          "apps/frontend/react/rui/src/favicon.ico",
-          "apps/frontend/react/rui/src/assets"
-        ]
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
+    "name": "rui",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/frontend/react/rui/src",
+    "projectType": "application",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@nx/rspack:rspack",
+            "outputs": [
+                "{options.outputPath}"
+            ],
+            "defaultConfiguration": "production",
+            "options": {
+                "target": "web",
+                "outputPath": "dist/apps/frontend/react/rui",
+                "index": "apps/frontend/react/rui/src/index.html",
+                "main": "apps/frontend/react/rui/src/main.tsx",
+                "tsConfig": "apps/frontend/react/rui/tsconfig.app.json",
+                "rspackConfig": "apps/frontend/react/rui/rspack.config.js",
+                "assets": [
+                    "apps/frontend/react/rui/src/favicon.ico",
+                    "apps/frontend/react/rui/src/assets"
+                ]
+            },
+            "configurations": {
+                "development": {
+                    "mode": "development"
+                },
+                "production": {
+                    "mode": "production",
+                    "optimization": true,
+                    "sourceMap": false
+                }
+            }
         },
-        "production": {
-          "mode": "production",
-          "optimization": true,
-          "sourceMap": false
+        "serve": {
+            "executor": "@nx/rspack:dev-server",
+            "options": {
+                "buildTarget": "rui:build:development"
+            },
+            "configurations": {
+                "development": {
+                    "mode": "development"
+                },
+                "production": {
+                    "buildTarget": "rui:build:production"
+                }
+            }
+        },
+        "serve-static": {
+            "executor": "@nx/web:file-server",
+            "dependsOn": [
+                "build"
+            ],
+            "options": {
+                "buildTarget": "rui:build",
+                "spa": true
+            }
         }
-      }
-    },
-    "serve": {
-      "executor": "@nx/rspack:dev-server",
-      "options": {
-        "buildTarget": "rui:build:development"
-      },
-      "configurations": {
-        "development": {},
-        "production": {
-          "buildTarget": "rui:build:production"
-        }
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "dependsOn": ["build"],
-      "options": {
-        "buildTarget": "rui:build",
-        "spa": true
-      }
     }
-  }
 }

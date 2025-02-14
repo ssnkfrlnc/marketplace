@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Version Tracking Schema",
+    "description": "Schema for single-document version tracking",
+    "bsonType": "object",
+    "required": [
+        "_id",
+        "applications"
+    ],
+    "properties": {
+        "_id": {
+            "bsonType": "objectId",
+            "description": "Auto-generated document ID"
+        },
+        "applications": {
+            "bsonType": "array",
+            "description": "Array of application version histories",
+            "items": {
+                "bsonType": "object",
+                "required": [
+                    "id",
+                    "versions"
+                ],
+                "properties": {
+                    "id": {
+                        "bsonType": "string",
+                        "description": "Use case identifier matching collection name"
+                    },
+                    "versions": {
+                        "bsonType": "array",
+                        "description": "Version history for the use case",
+                        "items": {
+                            "bsonType": "object",
+                            "required": [
+                                "version_id",
+                                "created_at",
+                                "updated_at"
+                            ],
+                            "properties": {
+                                "version_id": {
+                                    "bsonType": "string",
+                                    "description": "Unique version identifier matching use case config version ids"
+                                },
+                                "created_at": {
+                                    "bsonType": "date",
+                                    "description": "Creation timestamp in ISO format"
+                                },
+                                "updated_at": {
+                                    "bsonType": "date",
+                                    "description": "Last update timestamp in ISO format"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

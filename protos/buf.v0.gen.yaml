@@ -1,0 +1,29 @@
+version: "v2"
+clean: true
+managed:
+  enabled: true
+inputs:
+  - directory: .
+plugins:
+  # github.com/connectrpc/connect-es
+  # github.com/connectrpc/protoc-gen-connect-es
+  - remote: buf.build/bufbuild/es:v2.2.3 # dependencies for js and ts stubs
+    opt:
+      - target=ts
+      - ts_nocheck=false
+      - import_extension=none
+      - js_import_style=module
+      - json_types=true
+    out: ../apps/marketplace/src/entities/v1
+  - remote: buf.build/grpc/web
+    out: ../apps/marketplace/src/entities/v1
+    opt:
+      - mode=grpcweb
+  - remote: buf.build/grpc/node
+    out: ../apps/marketplace/src/entities/v1
+  - local: protoc-gen-doc # github.com/pseudomuto/protoc-gen-doc
+    out: ../docs/v1
+    opt:
+      - markdown
+      - protos.md
+    strategy: all
