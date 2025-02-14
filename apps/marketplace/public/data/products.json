@@ -1,0 +1,20 @@
+[
+    {
+        "id": "prod_1",
+        "name": "Product One",
+        "description": "Placeholder description for Product One",
+        "cost": {
+            "price": 1,
+            "unit": "INR"
+        },
+        "units": {
+            "sold": 10,
+            "available": 1000
+        },
+        "meta": {
+            "categories": [],
+            "description": "Some big text in markdown",
+            "sellers": []
+        }
+    }
+]
