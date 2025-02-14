@@ -1,0 +1,14 @@
+# List all project part of the monorepo
+
+nx show projects
+
+# Remove a project from the monorepo
+
+nx g @nx/workspace:remove <project-name>
+
+# List features exposed by a plugin
+
+nx list <plugin-name>
+
+example:
+nx list @nx-go/nx-go

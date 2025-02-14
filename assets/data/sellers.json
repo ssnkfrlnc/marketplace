@@ -1,0 +1,69 @@
+[
+    {
+        "id": "seller_1",
+        "name": "Seller One",
+        "description": "Placeholder description for Seller One",
+        "meta": {
+            "address": {
+                "description": "",
+                "pin": "",
+                "state": "",
+                "country": "",
+                "contact": {
+                    "email": "",
+                    "phone": ""
+                }
+            },
+            "ratings": {
+                "total": 10,
+                "average": 3.6,
+                "reviews": [{
+                    "brief": "",
+                    "description": "",
+                    "rating": 3.9,
+                    "user": {
+                        "id": "",
+                        "name": "",
+                        "location": "State, Country",
+                        "purchased": false
+                    }
+                }]
+            }
+        },
+        "products": ["prod_1", "prod_2"],
+        "categories": ["cat_1", "cat_2"]
+    }, {
+        "id": "seller_2",
+        "name": "Seller Two",
+        "description": "Placeholder description for Seller Two",
+        "meta": {
+            "address": {
+                "description": "",
+                "pin": "",
+                "state": "",
+                "country": "",
+                "contact": {
+                    "email": "",
+                    "phone": ""
+                }
+            },
+            "ratings": {
+                "total": 10,
+                "average": 3.6,
+                "reviews": [{
+                    "brief": "",
+                    "description": "",
+                    "rating": 3.9,
+                    "user": {
+                        "id": "",
+                        "name": "",
+                        "location": "State, Country",
+                        "purchased": false
+                    }
+                }]
+            }
+        },
+        "products": ["prod_1", "prod_2"],
+        "categories": ["cat_1", "cat_2"]
+    }
+]

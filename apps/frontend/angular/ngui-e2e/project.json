@@ -1,0 +1,10 @@
+{
+  "name": "ngui-e2e",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/angular/ngui-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["ngui"],
+  "// targets": "to see all targets run: nx show project ngui-e2e --web",
+  "targets": {}
+}

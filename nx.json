@@ -18,7 +18,7 @@
     ],
     "sharedGlobals": [
       "{workspaceRoot}/.github/workflows/ci.yml",
-      "{workspaceRoot}/go.mod"
+      "{workspaceRoot}/go.work"
     ]
   },
   "nxCloudId": "6790c2c643ab05b3c054af9b",
@@ -51,10 +51,15 @@
       }
     },
     "e2e-ci--**/*": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "^build-static"]
     },
     "server": {
       "cache": true
+    },
+    "@angular-devkit/build-angular:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "plugins": [
@@ -73,7 +78,59 @@
         "targetName": "lint"
       }
     },
-    "@nx-go/nx-go"
+    "@nx-go/nx-go",
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck"
+      }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    },
+    {
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "startTargetName": "start",
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "serveStaticTargetName": "serve-static"
+      }
+    },
+    {
+      "plugin": "@nx/nuxt/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve"
+      }
+    },
+    {
+      "plugin": "@nx/rsbuild",
+      "options": {
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "previewTargetName": "preview",
+        "inspectTargetName": "inspect",
+        "typecheckTargetName": "typecheck"
+      }
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
+      }
+    },
+    "@monodon/rust"
   ],
   "generators": {
     "@nx/angular:application": {
@@ -81,6 +138,33 @@
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "jest"
+    },
+    "@nx/react": {
+      "application": {
+        "babel": true,
+        "style": "@emotion/styled",
+        "linter": "eslint",
+        "bundler": "rspack"
+      },
+      "component": {
+        "style": "@emotion/styled"
+      },
+      "library": {
+        "style": "@emotion/styled",
+        "linter": "eslint"
+      }
+    },
+    "@nx/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    },
+    "@nx/web:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "vitest",
+      "e2eTestRunner": "playwright"
     }
   }
 }

@@ -46,3 +46,20 @@ Thumbs.db
 .nx/workspace-data
 
 .angular
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
+
+# Next.js
+.next
+out
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+
+.cargo
+Cargo.lock
+*.html

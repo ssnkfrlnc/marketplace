@@ -1,0 +1,10 @@
+{
+  "name": "nuxui-e2e",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/frontend/nuxt/nuxui-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["nuxui"],
+  "// targets": "to see all targets run: nx show project nuxui-e2e --web",
+  "targets": {}
+}

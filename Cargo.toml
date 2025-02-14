@@ -1,0 +1,11 @@
+
+[workspace]
+resolver = '2'
+members = [
+	'apps/apps_backend_rbe',
+	'apps/apps/backend/rbe',
+	'apps/backend/rbe',
+]
+
+[profile.release]
+lto = true
